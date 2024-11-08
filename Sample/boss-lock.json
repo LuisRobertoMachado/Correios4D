@@ -1,0 +1,22 @@
+{
+	"hash": "d41d8cd98f00b204e9800998ecf8427e",
+	"updated": "2024-11-07T13:48:32.1456467-03:00",
+	"installedModules": {
+		"github.com/luisrobertomachado/helpers": {
+			"name": "helpers",
+			"version": "master",
+			"hash": "a38eca5910e3bd09a1f923f3148c8509",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		},
+		"https://github.com/gabrielbaltazar/gbjson": {
+			"name": "gbjson",
+			"version": "1.1.2",
+			"hash": "7393d9f407542ce6bfd95def9b4a04fd",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		}
+	}
+}

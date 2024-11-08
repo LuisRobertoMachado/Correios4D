@@ -1,0 +1,12 @@
+{
+	"name": "Sample",
+	"description": "",
+	"version": "1.0.0",
+	"homepage": "",
+	"mainsrc": "./src",
+	"projects": [],
+	"dependencies": {
+		"github.com/luisrobertomachado/helpers": ">0.0.0",
+		"https://github.com/gabrielbaltazar/gbjson": "^1.1.2"
+	}
+}

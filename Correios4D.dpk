@@ -1,0 +1,53 @@
+package Correios4D;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  bindengine,
+  bindcomp,
+  RESTComponents;
+
+contains
+  Correios4D in 'src\Correios4D.pas',
+  Correios4D.Interfaces in 'src\Correios4D.Interfaces.pas',
+  Correios4D.Auth.Interfaces in 'src\auth\Correios4D.Auth.Interfaces.pas',
+  Correios4D.Auth.AuthConfig in 'src\auth\Correios4D.Auth.AuthConfig.pas',
+  Correios4D.httpClient.Interfaces in 'src\httpClient\Correios4D.httpClient.Interfaces.pas',
+  Correios4D.Types in 'src\utils\Correios4D.Types.pas',
+  Correios4D.httpClient.RestHttpClient in 'src\httpClient\Correios4D.httpClient.RestHttpClient.pas',
+  Correios4D.Resources.CorreiosAPI in 'src\resources\Correios4D.Resources.CorreiosAPI.pas',
+  Correios4D.Resources.Interfaces in 'src\resources\Correios4D.Resources.Interfaces.pas',
+  Correios4D.Model.Entitys in 'src\model\Correios4D.Model.Entitys.pas',
+  Correios4D.Model.DTO.prepostagem.utils.types in 'src\model\dto\prepostagem\utils\Correios4D.Model.DTO.prepostagem.utils.types.pas',
+  Correios4D.Model.DTO.prepostagem in 'src\model\dto\prepostagem\Correios4D.Model.DTO.prepostagem.pas',
+  Correios4D.Model.DTO.prepostagem.Remetente in 'src\model\dto\prepostagem\Correios4D.Model.DTO.prepostagem.Remetente.pas',
+  Correios4D.Attributes in 'src\utils\Correios4D.Attributes.pas',
+  Correios4D.Model.DTO.prepostagem.Endereco in 'src\model\dto\prepostagem\Correios4D.Model.DTO.prepostagem.Endereco.pas';
+
+end.
