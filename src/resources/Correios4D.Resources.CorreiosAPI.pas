@@ -45,7 +45,7 @@ begin
   if not validar(TEntity(Value)) then
     raise Exception.Create('Existem parametros inválidos:' + sLineBreak);
 
-  LJson := Value.Content(FParent.Api);
+//  LJson := Value.Content(FParent.Api);
   FHttpClient.Body(LJson);
   Writeln(LJson);
 end;

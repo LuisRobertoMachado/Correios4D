@@ -3,54 +3,59 @@ unit Correios4D.Model.Entitys;
 interface
 
 uses
-  System.SysUtils,
-  Correios4D.Model.DTO.prepostagem, Correios4D.Types;
+  System.SysUtils, Correios4D.Model.Interfaces;
 
 type
-  TEntity = class
+  TEntity = class(TInterfacedObject, iEntity)
   private
-    FPrepostagem: TPrepostagemDTO<TEntity>;
+    constructor CreatePrivate;
   public
     constructor Create;
     destructor Destroy; override;
-    function Prepostagem: TPrepostagemDTO<TEntity>;
-    function Content(Api: TApiType): String;
+    class function New: iEntity;
+    function Prepostagem: iPrepostagemDTO;
+    function Content(Value: String): iEntity; overload;
+    function Content: String; overload;
   end;
 
 implementation
 
-uses
-  System.JSON,
-  REST.JSON;
-
 { TEntity }
 
-function TEntity.Content(Api: TApiType): String;
+function TEntity.Content(Value: String): iEntity;
 begin
-  case ord(Api) of
-//    TOKEN: ;
-//    PRECO: ;
-    2:   Result := TJSON.ObjectToJsonString(Fprepostagem);
-//    PRAZO: ;
-  end;
+
+end;
+
+function TEntity.Content: String;
+begin
+
 end;
 
 constructor TEntity.Create;
 begin
+  raise Exception.Create('Para obter uma instancia, utiliza a função New');
+end;
 
+constructor TEntity.CreatePrivate;
+begin
+  inherited Create;
 end;
 
 destructor TEntity.Destroy;
 begin
-  FPrepostagem.Free;
+
   inherited;
 end;
 
-function TEntity.Prepostagem: TPrepostagemDTO<TEntity>;
+class function TEntity.New: iEntity;
 begin
-  if not Assigned(FPrepostagem) then
-    FPrepostagem := TPrepostagemDTO<TEntity>.Create(Self);
-  Result := FPrepostagem;
+  result := Self.CreatePrivate;
+end;
+
+function TEntity.Prepostagem: iPrepostagemDTO;
+begin
+
 end;
 
 end.

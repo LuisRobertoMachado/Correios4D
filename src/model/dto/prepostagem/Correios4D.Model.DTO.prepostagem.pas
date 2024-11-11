@@ -4,237 +4,208 @@ interface
 
 uses
   System.SysUtils,
-  REST.Json.Types,
-  Correios4D.Attributes,
-  Correios4D.Model.DTO.prepostagem.utils.types,
-  Correios4D.Model.DTO.prepostagem.Remetente;
+  Correios4D.Model.Interfaces,
+  Correios4D.Model.DTO.prepostagem.utils.types;
 
 type
-  TPrepostagemDTO<T: class> = class
+  TPrepostagemDTO = class(TInterfacedObject, iPrepostagemDTO)
   private
-    [weak]
-    [JSONMarshalled(False)]
-    FParent: T;
-    FIdCorreios: string;
-    [NotNull]
-    FCodigoServico: string;
-    FPrecoServico: string;
-    FPrecoPostagem: string;
-    FNumeroNotaFiscal: string;
-    FNumeroCartaoPostagem: string;
-    FChaveNFe: string;
-    [NotNull]
-    FPesoInformado: string;
-    [NotNull]
-    FFormatoObjeto: TFormatoObjeto;
-    FAlturaInformada: string;
-    FLarguraInformada: string;
-    FComprimentoInformado: string;
-    FDiametroInformado: string;
-    FNcmObjeto: string;
-    FRFIDObjeto: string;
-    [NotNull]
-    FCienteObjetoNaoProibido: string;
-    FIdAtendimento: string;
-    FSolicitarColeta: string;
-    FCodigoObjeto: string;
-    FDataPrevistaPostagem: string;
-    FObservacao: string;
-    FModalidadePagamento: string;
-    FLogisticaReversa: string;
-    FDataValidadeLogReversa: string;
-    // FDeclaracaoConteudo: iDeclaracaoConteudo<TPrepostagemDTO<T>>;
-    // FServicoAdicional: iServicoAdicional<TPrepostagemDTO<T>>;
-    [TInterfacedObjectReflectAttribute]
-    FRemetente: TRemetenteDTO<TPrepostagemDTO<T>>;
-    // [JsonReflect(ctTypeObject, rtObject, TObjectInterceptor)]
-    // FDestinatario: TDestinatarioDTO<TPrepostagemDTO<T>>;
+    constructor CreatePrivate;
   public
-    constructor Create(Parent: T);
-    destructor Destroy; Override;
-    function IdCorreios(AValue: string): TPrepostagemDTO<T>;
-    function CodigoServico(AValue: string): TPrepostagemDTO<T>;
-    function PrecoServico(AValue: string): TPrepostagemDTO<T>;
-    function PrecoPostagem(AValue: string): TPrepostagemDTO<T>;
-    function NumeroNotaFiscal(AValue: string): TPrepostagemDTO<T>;
-    function NumeroCartaoPostagem(AValue: string): TPrepostagemDTO<T>;
-    function ChaveNFe(AValue: string): TPrepostagemDTO<T>;
-    function PesoInformado(AValue: string): TPrepostagemDTO<T>;
-    function FormatoObjeto(AValue: TFormatoObjeto): TPrepostagemDTO<T>;
-    function AlturaInformada(AValue: string): TPrepostagemDTO<T>;
-    function LarguraInformada(AValue: string): TPrepostagemDTO<T>;
-    function ComprimentoInformado(AValue: string): TPrepostagemDTO<T>;
-    function DiametroInformado(AValue: string): TPrepostagemDTO<T>;
-    function NcmObjeto(AValue: string): TPrepostagemDTO<T>;
-    function RFIDObjeto(AValue: string): TPrepostagemDTO<T>;
-    function CienteObjetoNaoProibido(AValue: string): TPrepostagemDTO<T>;
-    function IdAtendimento(AValue: string): TPrepostagemDTO<T>;
-    function SolicitarColeta(AValue: string): TPrepostagemDTO<T>;
-    function CodigoObjeto(AValue: string): TPrepostagemDTO<T>;
-    function DataPrevistaPostagem(AValue: string): TPrepostagemDTO<T>;
-    function Observacao(AValue: string): TPrepostagemDTO<T>;
-    function ModalidadePagamento(AValue: string): TPrepostagemDTO<T>;
-    function LogisticaReversa(AValue: string): TPrepostagemDTO<T>;
-    function DataValidadeLogReversa(AValue: string): TPrepostagemDTO<T>;
-    // function DeclaracaoConteudo: iDeclaracaoConteudo<TPrepostagemDTO<T>>;
-    // function ServicoAdicional: iServicoAdicional<TPrepostagemDTO<T>>;
-    function Remetente: TRemetenteDTO<TPrepostagemDTO<T>>;
-    // function Destinatario: iDestinatarioDTO<TPrepostagemDTO<T>>;
-    function &End: T;
+    constructor Create;
+    destructor Destroy; override;
+    class function New: iPrepostagemDTO;
+    function IdCorreios(AValue: string): iPrepostagemDTO;
+    function CodigoServico(AValue: string): iPrepostagemDTO;
+    function PrecoServico(AValue: string): iPrepostagemDTO;
+    function PrecoPostagem(AValue: string): iPrepostagemDTO;
+    function NumeroNotaFiscal(AValue: string): iPrepostagemDTO;
+    function NumeroCartaoPostagem(AValue: string): iPrepostagemDTO;
+    function ChaveNFe(AValue: string): iPrepostagemDTO;
+    function PesoInformado(AValue: string): iPrepostagemDTO;
+    function FormatoObjeto(AValue: TFormatoObjeto): iPrepostagemDTO;
+    function AlturaInformada(AValue: string): iPrepostagemDTO;
+    function LarguraInformada(AValue: string): iPrepostagemDTO;
+    function ComprimentoInformado(AValue: string): iPrepostagemDTO;
+    function DiametroInformado(AValue: string): iPrepostagemDTO;
+    function NcmObjeto(AValue: string): iPrepostagemDTO;
+    function RFIDObjeto(AValue: string): iPrepostagemDTO;
+    function CienteObjetoNaoProibido(AValue: string): iPrepostagemDTO;
+    function IdAtendimento(AValue: string): iPrepostagemDTO;
+    function SolicitarColeta(AValue: string): iPrepostagemDTO;
+    function CodigoObjeto(AValue: string): iPrepostagemDTO;
+    function DataPrevistaPostagem(AValue: string): iPrepostagemDTO;
+    function Observacao(AValue: string): iPrepostagemDTO;
+    function ModalidadePagamento(AValue: string): iPrepostagemDTO;
+    function LogisticaReversa(AValue: string): iPrepostagemDTO;
+    function DataValidadeLogReversa(AValue: string): iPrepostagemDTO;
+//    function DeclaracaoConteudo: iDeclaracaoConteudo<iPrepostagemDTO>;
+//    function ServicoAdicional: iServicoAdicional<iPrepostagemDTO>;
+    function Remetente: iRemetenteDTO<iPrepostagemDTO>;
+//    function Destinatario: iDestinatarioDTO<iPrepostagemDTO>;
+    function &End: iEntity;
   end;
 
 implementation
 
-{ TPrepostagemDTO<T> }
+{ TPrepostagemDTO }
 
-function TPrepostagemDTO<T>.&End: T;
-begin
-  Result := FParent;
-end;
-
-function TPrepostagemDTO<T>.AlturaInformada(AValue: string): TPrepostagemDTO<T>;
+function TPrepostagemDTO.AlturaInformada(AValue: string): iPrepostagemDTO;
 begin
 
 end;
 
-function TPrepostagemDTO<T>.ChaveNFe(AValue: string): TPrepostagemDTO<T>;
+function TPrepostagemDTO.ChaveNFe(AValue: string): iPrepostagemDTO;
 begin
 
 end;
 
-function TPrepostagemDTO<T>.CienteObjetoNaoProibido(AValue: string)
-  : TPrepostagemDTO<T>;
+function TPrepostagemDTO.CienteObjetoNaoProibido(AValue: string)
+  : iPrepostagemDTO;
 begin
 
 end;
 
-function TPrepostagemDTO<T>.CodigoObjeto(AValue: string): TPrepostagemDTO<T>;
+function TPrepostagemDTO.CodigoObjeto(AValue: string): iPrepostagemDTO;
 begin
 
 end;
 
-function TPrepostagemDTO<T>.CodigoServico(AValue: string): TPrepostagemDTO<T>;
+function TPrepostagemDTO.CodigoServico(AValue: string): iPrepostagemDTO;
 begin
 
 end;
 
-function TPrepostagemDTO<T>.ComprimentoInformado(AValue: string): TPrepostagemDTO<T>;
+function TPrepostagemDTO.ComprimentoInformado(AValue: string)
+  : iPrepostagemDTO;
 begin
 
 end;
 
-constructor TPrepostagemDTO<T>.Create(Parent: T);
-begin
-  FParent := Parent;
-end;
-
-function TPrepostagemDTO<T>.DataPrevistaPostagem(AValue: string): TPrepostagemDTO<T>;
+function TPrepostagemDTO.&End: iEntity;
 begin
 
 end;
 
-function TPrepostagemDTO<T>.DataValidadeLogReversa(AValue: string)
-  : TPrepostagemDTO<T>;
+constructor TPrepostagemDTO.Create;
+begin
+  raise Exception.Create('Para obter uma instancia, utiliza a função New');
+end;
+
+constructor TPrepostagemDTO.CreatePrivate;
+begin
+  inherited Create;
+end;
+
+function TPrepostagemDTO.DataPrevistaPostagem(AValue: string)
+  : iPrepostagemDTO;
 begin
 
 end;
 
-// function TPrepostagemDTO<T>.Destinatario: iDestinatarioDTO<TPrepostagemDTO<T>>;
-// begin
-//
-// end;
-
-destructor TPrepostagemDTO<T>.Destroy;
+function TPrepostagemDTO.DataValidadeLogReversa(AValue: string)
+  : iPrepostagemDTO;
 begin
-  FRemetente.Free;
+
+end;
+
+destructor TPrepostagemDTO.Destroy;
+begin
+
   inherited;
 end;
 
-function TPrepostagemDTO<T>.DiametroInformado(AValue: string): TPrepostagemDTO<T>;
+function TPrepostagemDTO.DiametroInformado(AValue: string): iPrepostagemDTO;
 begin
 
 end;
 
-function TPrepostagemDTO<T>.FormatoObjeto(AValue: TFormatoObjeto): TPrepostagemDTO<T>;
+function TPrepostagemDTO.FormatoObjeto(AValue: TFormatoObjeto)
+  : iPrepostagemDTO;
 begin
 
 end;
 
-function TPrepostagemDTO<T>.IdAtendimento(AValue: string): TPrepostagemDTO<T>;
+function TPrepostagemDTO.IdAtendimento(AValue: string): iPrepostagemDTO;
 begin
 
 end;
 
-function TPrepostagemDTO<T>.IdCorreios(AValue: string): TPrepostagemDTO<T>;
+function TPrepostagemDTO.IdCorreios(AValue: string): iPrepostagemDTO;
 begin
 
 end;
 
-function TPrepostagemDTO<T>.LarguraInformada(AValue: string): TPrepostagemDTO<T>;
+function TPrepostagemDTO.LarguraInformada(AValue: string): iPrepostagemDTO;
 begin
 
 end;
 
-function TPrepostagemDTO<T>.LogisticaReversa(AValue: string): TPrepostagemDTO<T>;
+function TPrepostagemDTO.LogisticaReversa(AValue: string): iPrepostagemDTO;
 begin
 
 end;
 
-function TPrepostagemDTO<T>.ModalidadePagamento(AValue: string): TPrepostagemDTO<T>;
+function TPrepostagemDTO.ModalidadePagamento(AValue: string)
+  : iPrepostagemDTO;
 begin
 
 end;
 
-function TPrepostagemDTO<T>.NcmObjeto(AValue: string): TPrepostagemDTO<T>;
+function TPrepostagemDTO.NcmObjeto(AValue: string): iPrepostagemDTO;
 begin
 
 end;
 
-function TPrepostagemDTO<T>.NumeroCartaoPostagem(AValue: string): TPrepostagemDTO<T>;
+class function TPrepostagemDTO.New: iPrepostagemDTO;
+begin
+  result := Self.CreatePrivate;
+end;
+
+function TPrepostagemDTO.NumeroCartaoPostagem(AValue: string)
+  : iPrepostagemDTO;
 begin
 
 end;
 
-function TPrepostagemDTO<T>.NumeroNotaFiscal(AValue: string): TPrepostagemDTO<T>;
+function TPrepostagemDTO.NumeroNotaFiscal(AValue: string): iPrepostagemDTO;
 begin
 
 end;
 
-function TPrepostagemDTO<T>.Observacao(AValue: string): TPrepostagemDTO<T>;
+function TPrepostagemDTO.Observacao(AValue: string): iPrepostagemDTO;
 begin
 
 end;
 
-function TPrepostagemDTO<T>.PesoInformado(AValue: string): TPrepostagemDTO<T>;
+function TPrepostagemDTO.PesoInformado(AValue: string): iPrepostagemDTO;
 begin
 
 end;
 
-function TPrepostagemDTO<T>.PrecoPostagem(AValue: string): TPrepostagemDTO<T>;
+function TPrepostagemDTO.PrecoPostagem(AValue: string): iPrepostagemDTO;
 begin
 
 end;
 
-function TPrepostagemDTO<T>.PrecoServico(AValue: string): TPrepostagemDTO<T>;
+function TPrepostagemDTO.PrecoServico(AValue: string): iPrepostagemDTO;
 begin
 
 end;
 
-function TPrepostagemDTO<T>.Remetente: TRemetenteDTO<TPrepostagemDTO<T>>;
-begin
-  if not assigned(FRemetente) then
-    FRemetente := TRemetenteDTO<TPrepostagemDTO<T>>.Create(Self);
-  Result := FRemetente;
-end;
-
-function TPrepostagemDTO<T>.RFIDObjeto(AValue: string): TPrepostagemDTO<T>;
+function TPrepostagemDTO.Remetente: iRemetenteDTO<iPrepostagemDTO>;
 begin
 
 end;
 
-function TPrepostagemDTO<T>.SolicitarColeta(AValue: string): TPrepostagemDTO<T>;
+function TPrepostagemDTO.RFIDObjeto(AValue: string): iPrepostagemDTO;
 begin
 
 end;
 
-end.
+function TPrepostagemDTO.SolicitarColeta(AValue: string): iPrepostagemDTO;
+begin
+
+end;
+
+end. .

@@ -4,51 +4,29 @@ interface
 
 uses
   System.SysUtils,
+  System.JSON,
   System.JSON.Types,
-  Correios4D.Attributes,
-  Correios4D.Model.DTO.prepostagem.Endereco;
+  System.Generics.Collections,
+  Correios4D.Model.Interfaces;
 
 type
-  TRemetenteDTO<T: class> = class
+  TRemetenteDTO<T: IInterface> = class(TInterfacedObject, iRemetenteDTO<T>)
   private
-    [weak]
-    [JSONMarshalled(False)]
-    FParent: T;
-    // [MaxLength(100)]
-    [NotNull]
-    [JSONName('nome')]
-    FNome: string;
-    [JSONName('dddTelefone')]
-    FDDDTelefone: string;
-    [JSONName('telefone')]
-    FTelefone: string;
-    [JSONName('dddCelular')]
-    FDDDCelular: string;
-    [JSONName('celular')]
-    FCelular: string;
-    [JSONName('email')]
-    FEmail: string;
-    [JSONName('cpfCnpj')]
-    FCpfCnpj: string;
-    [JSONName('documentoEstrangeiro')]
-    FDocumentoEstrangeiro: string;
-    [JSONName('obs')]
-    FObservacao: string;
-    [JSONName('endereco')]
-    FEndereco: TEnderecoDTO<TRemetenteDTO<T>>;
+    constructor CreatePrivate(Parent: T; JSON: TJSONObject);
   public
-    constructor Create(Parent: T);
+    constructor Create;
     destructor Destroy; override;
-    function Nome(AValue: string): TRemetenteDTO<T>;
-    function DDDTelefone(AValue: string): TRemetenteDTO<T>;
-    function Telefone(AValue: string): TRemetenteDTO<T>;
-    function DDDCelular(AValue: string): TRemetenteDTO<T>;
-    function Celular(AValue: string): TRemetenteDTO<T>;
-    function Email(AValue: string): TRemetenteDTO<T>;
-    function CpfCnpj(AValue: string): TRemetenteDTO<T>;
-    function DocumentoEstrangeiro(AValue: string): TRemetenteDTO<T>;
-    function Observacao(AValue: string): TRemetenteDTO<T>;
-    function Endereco: TEnderecoDTO<TRemetenteDTO<T>>;
+    class function New(Parent: T; JSON: TJSONObject): iRemetenteDTO<T>;
+    function Nome(AValue: string): iRemetenteDTO<T>;
+    function DDDTelefone(AValue: string): iRemetenteDTO<T>;
+    function Telefone(AValue: string): iRemetenteDTO<T>;
+    function DDDCelular(AValue: string): iRemetenteDTO<T>;
+    function Celular(AValue: string): iRemetenteDTO<T>;
+    function Email(AValue: string): iRemetenteDTO<T>;
+    function CpfCnpj(AValue: string): iRemetenteDTO<T>;
+    function DocumentoEstrangeiro(AValue: string): iRemetenteDTO<T>;
+    function Observacao(AValue: string): iRemetenteDTO<T>;
+    function Endereco: iEnderecoDTO<iRemetenteDTO<T>>;
     function &End: T;
   end;
 
@@ -56,74 +34,82 @@ implementation
 
 { TRemetenteDTO<T> }
 
-function TRemetenteDTO<T>.Celular(AValue: string): TRemetenteDTO<T>;
+function TRemetenteDTO<T>.Celular(AValue: string): iRemetenteDTO<T>;
 begin
-  Result := Self;
+
 end;
 
-function TRemetenteDTO<T>.CpfCnpj(AValue: string): TRemetenteDTO<T>;
+function TRemetenteDTO<T>.CpfCnpj(AValue: string): iRemetenteDTO<T>;
 begin
-  Result := Self;
+
 end;
 
 function TRemetenteDTO<T>.&End: T;
 begin
-  Result := FParent;
+
 end;
 
-constructor TRemetenteDTO<T>.Create(Parent: T);
+constructor TRemetenteDTO<T>.Create;
 begin
-  FParent := Parent;
+  raise Exception.Create('Para obter uma instancia, utiliza a função New');
 end;
 
-function TRemetenteDTO<T>.DDDCelular(AValue: string): TRemetenteDTO<T>;
+constructor TRemetenteDTO<T>.CreatePrivate(Parent: T; JSON: TJSONObject);
 begin
-  Result := Self;
+  inherited Create;
 end;
 
-function TRemetenteDTO<T>.DDDTelefone(AValue: string): TRemetenteDTO<T>;
+function TRemetenteDTO<T>.DDDCelular(AValue: string): iRemetenteDTO<T>;
 begin
-  Result := Self;
+
+end;
+
+function TRemetenteDTO<T>.DDDTelefone(AValue: string): iRemetenteDTO<T>;
+begin
+
 end;
 
 destructor TRemetenteDTO<T>.Destroy;
 begin
-  FEndereco.Free;
+
   inherited;
 end;
 
-function TRemetenteDTO<T>.DocumentoEstrangeiro(AValue: string)
-  : TRemetenteDTO<T>;
+function TRemetenteDTO<T>.DocumentoEstrangeiro(
+  AValue: string): iRemetenteDTO<T>;
 begin
-  Result := Self;
+
 end;
 
-function TRemetenteDTO<T>.Email(AValue: string): TRemetenteDTO<T>;
+function TRemetenteDTO<T>.Email(AValue: string): iRemetenteDTO<T>;
 begin
-  Result := Self;
+
 end;
 
-function TRemetenteDTO<T>.Endereco: TEnderecoDTO<TRemetenteDTO<T>>;
+function TRemetenteDTO<T>.Endereco: iEnderecoDTO<iRemetenteDTO<T>>;
 begin
-  if not assigned(FEndereco) then
-    FEndereco := TEnderecoDTO<TRemetenteDTO<T>>.Create(Self);
-  Result := FEndereco;
+
 end;
 
-function TRemetenteDTO<T>.Nome(AValue: string): TRemetenteDTO<T>;
+class function TRemetenteDTO<T>.New(Parent: T; JSON: TJSONObject)
+  : iRemetenteDTO<T>;
 begin
-  Result := Self;
-  FNome := AValue;
+  result := Self.CreatePrivate(Parent, JSON);
 end;
 
-function TRemetenteDTO<T>.Observacao(AValue: string): TRemetenteDTO<T>;
+function TRemetenteDTO<T>.Nome(AValue: string): iRemetenteDTO<T>;
 begin
-  Result := Self;
+
 end;
 
-function TRemetenteDTO<T>.Telefone(AValue: string): TRemetenteDTO<T>;
+function TRemetenteDTO<T>.Observacao(AValue: string): iRemetenteDTO<T>;
 begin
-  Result := Self;
+
+end;
+
+function TRemetenteDTO<T>.Telefone(AValue: string): iRemetenteDTO<T>;
+begin
+
 end;
 
 end.
