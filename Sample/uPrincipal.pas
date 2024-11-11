@@ -33,13 +33,14 @@ var
 implementation
 
 uses
-  Correios4D.Model.Entitys, Correios4D.Types;
+  Correios4D.Model.Entitys, Correios4D.Types, Correios4D.Model.Interfaces,
+  Correios4D.Model.DTO.prepostagem.utils.types;
 
 {$R *.dfm}
 
 procedure TForm1.Button1Click(Sender: TObject);
 var
-  LEntity: TEntity;
+  LEntity: iEntity;
 begin
   FCorreios
     .AuthConfig
@@ -50,27 +51,42 @@ begin
     FCorreios
       .Entity
         .PrePostagem
+          .CodigoServico('4008')
+          .FormatoObjeto(Caixa)
           .Remetente
             .Nome('LUIS')
             .Endereco
               .CEP('94065170')
               .Logradouro('Rua São João Batista')
-              .NumeroResidencia('315')
+              .Numero('315')
               .Bairro('Parque Olinda')
               .Cidade('Gravataí')
-              .UF('RS')
+              .Estado('RS')
               .Pais('BR')
               .&End
             .&end
           .&end;
 
+  Memo1.Text := LEntity.content;
+  exit;
   FCorreios
     .Resources
-      .Body(LEntity);
-
-
-
-
+      .Body(FCorreios
+              .Entity
+                .PrePostagem
+                  .Remetente
+                    .Nome('LUIS')
+                    .Endereco
+                      .CEP('94065170')
+                      .Logradouro('Rua São João Batista')
+                      .Numero('315')
+                      .Bairro('Parque Olinda')
+                      .Cidade('Gravataí')
+                      .Estado('RS')
+                      .Pais('BR')
+                      .&End
+                    .&end
+                  .&end);
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);

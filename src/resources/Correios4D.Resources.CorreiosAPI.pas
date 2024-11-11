@@ -9,7 +9,7 @@ uses
   Correios4D.httpClient.Interfaces,
   Correios4D.Types,
   Correios4D.Attributes,
-  Correios4D.Model.Entitys;
+  Correios4D.Model.Interfaces;
 
 type
   TCorreios = class(TInterfacedObject, iCorreios)
@@ -25,7 +25,7 @@ type
     destructor Destroy; Override;
     class function New(Parent: iAuthConfig): iCorreios;
     function Params(aKey: String; aValue: String): iCorreios;
-    function Body(Value: TEntity): iCorreios;
+    function Body(Value: iEntity): iCorreios;
     function Content: String;
     function StatusCode: integer;
   end;
@@ -37,17 +37,13 @@ uses
 
 { TCorreios }
 
-function TCorreios.Body(Value: TEntity): iCorreios;
-var
-  LJson: string;
+function TCorreios.Body(Value: iEntity): iCorreios;
 begin
   Result := Self;
-  if not validar(TEntity(Value)) then
-    raise Exception.Create('Existem parametros inválidos:' + sLineBreak);
+//  if not validar(TEntity(Value)) then
+//    raise Exception.Create('Existem parametros inválidos:' + sLineBreak);
 
-//  LJson := Value.Content(FParent.Api);
-  FHttpClient.Body(LJson);
-  Writeln(LJson);
+  FHttpClient.Body(Value.Content);
 end;
 
 function TCorreios.Content: String;

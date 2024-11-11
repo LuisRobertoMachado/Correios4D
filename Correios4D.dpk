@@ -48,6 +48,7 @@ contains
   Correios4D.Model.DTO.prepostagem in 'src\model\dto\prepostagem\Correios4D.Model.DTO.prepostagem.pas',
   Correios4D.Model.DTO.prepostagem.Remetente in 'src\model\dto\prepostagem\Correios4D.Model.DTO.prepostagem.Remetente.pas',
   Correios4D.Attributes in 'src\utils\Correios4D.Attributes.pas',
-  Correios4D.Model.DTO.prepostagem.Endereco in 'src\model\dto\prepostagem\Correios4D.Model.DTO.prepostagem.Endereco.pas';
+  Correios4D.Model.DTO.prepostagem.Endereco in 'src\model\dto\prepostagem\Correios4D.Model.DTO.prepostagem.Endereco.pas',
+  Correios4D.Model.Interfaces in 'src\model\Correios4D.Model.Interfaces.pas';
 
 end.

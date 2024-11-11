@@ -6,20 +6,19 @@ uses
   Correios4D.Interfaces,
   Correios4D.Auth.Interfaces,
   Correios4D.Resources.Interfaces,
-  Correios4D.Model.Entitys;
+  Correios4D.Model.Entitys, Correios4D.Model.Interfaces;
 
 type
   TCorreios4D = class(TInterfacedObject, iCorreios4D)
   private
     FConfig: iAuthConfig;
-    FEntity: TEntity;
   public
     constructor Create;
     destructor Destroy; Override;
     class function New: iCorreios4D;
     function AuthConfig: iAuthConfig;
     function Resources: iCorreios;
-    function Entity: TEntity;
+    function Entity: iEntity;
   published
     { published declarations }
   end;
@@ -50,11 +49,9 @@ begin
   Inherited;
 end;
 
-function TCorreios4D.Entity: TEntity;
+function TCorreios4D.Entity: iEntity;
 begin
-  FEntity.Free;
-  FEntity := TEntity.Create;
-  Result := FEntity;
+  Result := TEntity.New;
 end;
 
 class function TCorreios4D.New: iCorreios4D;

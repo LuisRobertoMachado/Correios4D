@@ -8,6 +8,7 @@ uses
 type
   TEntity = class(TInterfacedObject, iEntity)
   private
+    FContent: String;
     constructor CreatePrivate;
   public
     constructor Create;
@@ -20,16 +21,20 @@ type
 
 implementation
 
+uses
+  Correios4D.Model.DTO.prepostagem;
+
 { TEntity }
 
 function TEntity.Content(Value: String): iEntity;
 begin
-
+  Result := Self;
+  FContent := Value;
 end;
 
 function TEntity.Content: String;
 begin
-
+  Result := FContent;
 end;
 
 constructor TEntity.Create;
@@ -55,7 +60,7 @@ end;
 
 function TEntity.Prepostagem: iPrepostagemDTO;
 begin
-
+  Result := TPrepostagemDTO.new(Self);
 end;
 
 end.

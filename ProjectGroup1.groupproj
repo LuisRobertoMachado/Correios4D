@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{D59F3464-67E5-4D87-85FE-2DFE5FE7BDE1}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Correios4D.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Sample\TestadorCorreios4D.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Correios4D">
+        <MSBuild Projects="Correios4D.dproj"/>
+    </Target>
+    <Target Name="Correios4D:Clean">
+        <MSBuild Projects="Correios4D.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Correios4D:Make">
+        <MSBuild Projects="Correios4D.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="TestadorCorreios4D">
+        <MSBuild Projects="Sample\TestadorCorreios4D.dproj"/>
+    </Target>
+    <Target Name="TestadorCorreios4D:Clean">
+        <MSBuild Projects="Sample\TestadorCorreios4D.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TestadorCorreios4D:Make">
+        <MSBuild Projects="Sample\TestadorCorreios4D.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Correios4D;TestadorCorreios4D"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Correios4D:Clean;TestadorCorreios4D:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Correios4D:Make;TestadorCorreios4D:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

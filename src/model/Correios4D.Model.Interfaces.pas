@@ -15,6 +15,7 @@ type
     function Bairro(const Value: string): iEnderecoDTO<T>;
     function Cidade(const Value: string): iEnderecoDTO<T>;
     function Estado(const Value: string): iEnderecoDTO<T>;
+    function Pais(const Value: string): iEnderecoDTO<T>;
     function Cep(const Value: string): iEnderecoDTO<T>;
     function &End: T;
   end;
@@ -68,6 +69,7 @@ type
   end;
 
   iEntity = interface
+  ['{3D49DB25-DFEB-4C0D-AB9B-1D7F0610DC6A}']
     function Prepostagem: iPrepostagemDTO;
     function Content(Value : String) : iEntity; overload;
     function Content : String; overload;
