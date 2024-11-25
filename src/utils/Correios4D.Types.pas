@@ -15,11 +15,16 @@ type
 
   TApiTokenEndPointBaseType = (AUTENTICA, AUTENTICA_CARTAO, AUTENTICA_CONTRATO);
 
-  TApiPrepostagemEndPointBaseType = (PREPOSTAGENS);
+  TApiPrepostagemEndPointBaseType = (PREPOSTAGENS, ROTULO_REGISTRADOS, DOWNLOAD_ROTULO);
 
   TAuthType = (BASIC_AUTH, OAUTH_2);
 
   TApiTokenEndPointBaseTypeHelper = record helper for TApiTokenEndPointBaseType
+    function GetValue: string;
+  end;
+
+  TApiPrepostagemEndPointBaseTypeHelper = record helper for
+    TApiPrepostagemEndPointBaseType
     function GetValue: string;
   end;
 
@@ -67,6 +72,17 @@ begin
     AUTENTICA: result := 'autentica';
     AUTENTICA_CARTAO: result := 'autentica/cartaopostagem';
     AUTENTICA_CONTRATO: result := 'autentica/contrato';
+  end;
+end;
+
+{ TApiPrepostagemEndPointBaseTypeHelper }
+
+function TApiPrepostagemEndPointBaseTypeHelper.GetValue: string;
+begin
+  case Self of
+    PREPOSTAGENS: result := 'prepostagens';
+    ROTULO_REGISTRADOS: Result := 'prepostagens/rotulo/assincrono/pdf';
+    DOWNLOAD_ROTULO: Result := 'prepostagens/rotulo/download/assincrono/';
   end;
 end;
 

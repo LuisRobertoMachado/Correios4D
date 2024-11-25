@@ -46,14 +46,15 @@ type
     // function DeclaracaoConteudo: iDeclaracaoConteudo<iPrepostagemDTO>;
     // function ServicoAdicional: iServicoAdicional<iPrepostagemDTO>;
     function Remetente: iRemetenteDTO<iPrepostagemDTO>;
-    // function Destinatario: iDestinatarioDTO<iPrepostagemDTO>;
+    function Destinatario: iDestinatarioDTO<iPrepostagemDTO>;
     function &End: iEntity;
   end;
 
 implementation
 
 uses
-  Correios4D.Model.DTO.prepostagem.Remetente;
+  Correios4D.Model.DTO.prepostagem.Remetente,
+  Correios4D.Model.DTO.prepostagem.Destinatario;
 
 { TPrepostagemDTO }
 
@@ -122,6 +123,11 @@ function TPrepostagemDTO.DataValidadeLogReversa(AValue: string)
 begin
   Result := Self;
   FJSON.AddPair('dataValidadeLogReversa',AValue);
+end;
+
+function TPrepostagemDTO.Destinatario: iDestinatarioDTO<iPrepostagemDTO>;
+begin
+  Result := TDestinatarioDTO<iPrepostagemDTO>.New(Self, FJSON);
 end;
 
 destructor TPrepostagemDTO.Destroy;

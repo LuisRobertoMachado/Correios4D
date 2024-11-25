@@ -8,9 +8,11 @@ uses
 
 type
   iCorreios = interface
-    function Params(aKey: String; aValue: String): iCorreios;
     function Body(Value: iEntity): iCorreios;
     function Content: String;
+    function Params(aKey: String; aValue: String): iCorreios;
+    function Get(ASufix: string = ''): boolean;
+    function Post: boolean;
     function StatusCode: integer;
   end;
 

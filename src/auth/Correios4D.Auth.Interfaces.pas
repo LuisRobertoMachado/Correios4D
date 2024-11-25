@@ -11,7 +11,8 @@ type
     function Api: TApitype; Overload;
     function ApiVersion(AVersion: TApiVersion): iAuthConfig; Overload;
     function ApiVersion: string; Overload;
-    function EndPoint: string;
+    function PrepostagemEndPoint(AEndPoint: TApiPrepostagemEndPointBaseType): iAuthConfig; Overload;
+    function EndPoint: string; Overload;
     function BaseUrl(AValue: string): iAuthConfig; Overload;
     function BaseUrl: string; Overload;
     function UserName(AValue: string): iAuthConfig; Overload;

@@ -20,6 +20,23 @@ type
     function &End: T;
   end;
 
+  iDestinatarioDTO<T: IInterface> = interface
+    ['{B6C4A2A9-7E6B-4D8B-8F5C-C3A9D1E4BCFA}']
+    function Nome(AValue: string): iDestinatarioDTO<T>;
+    function DDDTelefone(AValue: string): iDestinatarioDTO<T>;
+    function DDITelefone(AValue: string): iDestinatarioDTO<T>;
+    function Telefone(AValue: string): iDestinatarioDTO<T>;
+    function DDDCelular(AValue: string): iDestinatarioDTO<T>;
+    function DDICelular(AValue: string): iDestinatarioDTO<T>;
+    function Celular(AValue: string): iDestinatarioDTO<T>;
+    function Email(AValue: string): iDestinatarioDTO<T>;
+    function CpfCnpj(AValue: string): iDestinatarioDTO<T>;
+    function DocumentoEstrangeiro(AValue: string): iDestinatarioDTO<T>;
+    function Observacao(AValue: string): iDestinatarioDTO<T>;
+    function Endereco: iEnderecoDTO<iDestinatarioDTO<T>>;
+    function &End: T;
+  end;
+
   iRemetenteDTO<T: IInterface> = interface
     ['{B6C4A2A9-7E6B-4D8B-8F5C-C3A9D1E4BCFA}']
     function Nome(AValue: string): iRemetenteDTO<T>;
@@ -64,12 +81,25 @@ type
     // function DeclaracaoConteudo: iDeclaracaoConteudo<iPrepostagemDTO>;
     // function ServicoAdicional: iServicoAdicional<iPrepostagemDTO>;
     function Remetente: iRemetenteDTO<iPrepostagemDTO>;
-    // function Destinatario: iDestinatarioDTO<iPrepostagemDTO>;
+    function Destinatario: iDestinatarioDTO<iPrepostagemDTO>;
+    function &End: iEntity;
+  end;
+
+  iPrepostagemRotuloDTO = interface
+  ['{514F2B43-CA78-4BB4-A511-37B876C1A91F}']
+    function CodigosObjetos(AValue: TArray<string>): iPrepostagemRotuloDTO;
+    function IdCorreios(AValue: string): iPrepostagemRotuloDTO;
+    function NumeroCartaoPostagem(AValue: string): iPrepostagemRotuloDTO;
+    function TipoRotulo(ATipo: TTipoRotulo): iPrepostagemRotuloDTO;
+    function FormatoRotulo(AFormato: TFormatoRotulo): iPrepostagemRotuloDTO;
+    function ImprimeRemetente(AImprimir: boolean): iPrepostagemRotuloDTO;
+    function Layout(ALayout: TLayoutRotulo): iPrepostagemRotuloDTO;
     function &End: iEntity;
   end;
 
   iEntity = interface
   ['{3D49DB25-DFEB-4C0D-AB9B-1D7F0610DC6A}']
+    function PrepostagemRotulo: iPrepostagemRotuloDTO;
     function Prepostagem: iPrepostagemDTO;
     function Content(Value : String) : iEntity; overload;
     function Content : String; overload;

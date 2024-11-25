@@ -57,7 +57,7 @@
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <DCC_CBuilderOutput>All</DCC_CBuilderOutput>
         <SanitizedProjectName>Correios4D</SanitizedProjectName>
-        <DCC_UnitSearchPath>..\modules\.dcp;..\modules\.dcu;..\modules;..\modules\helpers\src;modules\.dcp;modules\.dcu;modules;modules\gbjson\Source;..\modules\gbjson\Source;modules\helpers\src;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_UnitSearchPath>..\modules\.dcp;..\modules\.dcu;..\modules;..\modules\helpers\src;..\modules\gbjson\Source;$(DCC_UnitSearchPath);modules\.dcp;modules\.dcu;modules;modules\gbjson\Source;modules\helpers\src</DCC_UnitSearchPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Android)'!=''">
         <DCC_CBuilderOutput>None</DCC_CBuilderOutput>
@@ -115,6 +115,8 @@
         <DCCReference Include="src\utils\Correios4D.Attributes.pas"/>
         <DCCReference Include="src\model\dto\prepostagem\Correios4D.Model.DTO.prepostagem.Endereco.pas"/>
         <DCCReference Include="src\model\Correios4D.Model.Interfaces.pas"/>
+        <DCCReference Include="src\model\dto\prepostagem\Correios4D.Model.DTO.prepostagem.Destinatario.pas"/>
+        <DCCReference Include="src\model\dto\prepostagem\Correios4D.Model.DTO.prepostagem.Rotulo.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

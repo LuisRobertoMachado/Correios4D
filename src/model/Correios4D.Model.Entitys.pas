@@ -15,6 +15,7 @@ type
     destructor Destroy; override;
     class function New: iEntity;
     function Prepostagem: iPrepostagemDTO;
+    function PrepostagemRotulo: iPrepostagemRotuloDTO;
     function Content(Value: String): iEntity; overload;
     function Content: String; overload;
   end;
@@ -22,7 +23,7 @@ type
 implementation
 
 uses
-  Correios4D.Model.DTO.prepostagem;
+  Correios4D.Model.DTO.prepostagem, Correios4D.Model.DTO.prepostagem.Rotulo;
 
 { TEntity }
 
@@ -61,6 +62,11 @@ end;
 function TEntity.Prepostagem: iPrepostagemDTO;
 begin
   Result := TPrepostagemDTO.new(Self);
+end;
+
+function TEntity.PrepostagemRotulo: iPrepostagemRotuloDTO;
+begin
+  Result := TPrepostagemRotuloDTO.new(Self);
 end;
 
 end.

@@ -20,13 +20,17 @@ type
     FApi: TApiType;
     FApiVersion: TApiVersion;
     constructor CreatePrivate(Parent: iAuthConfig);
+    procedure DoBeforeExecute(ASufix: string = '');
   public
     constructor Create;
     destructor Destroy; Override;
     class function New(Parent: iAuthConfig): iCorreios;
-    function Params(aKey: String; aValue: String): iCorreios;
+//    function
     function Body(Value: iEntity): iCorreios;
     function Content: String;
+    function Params(aKey: String; aValue: String): iCorreios;
+    function Get(ASufix: string = ''): boolean;
+    function Post: boolean;
     function StatusCode: integer;
   end;
 
@@ -70,6 +74,26 @@ begin
   inherited;
 end;
 
+procedure TCorreios.DoBeforeExecute(ASufix: string = '');
+var
+  LUrl: string;
+begin
+  LUrl := string.join('/',[FParent.BaseUrl,FParent.Api.ToString, FParent.ApiVersion,FParent.EndPoint]);
+  if not ASufix.IsEmpty then
+    LUrl := string.join('/',[LUrl, ASufix]);
+  FHttpClient.Url(LUrl);
+end;
+
+function TCorreios.Get(ASufix: string): boolean;
+begin
+  Result := False;
+  DoBeforeExecute(ASufix);
+  FHttpClient
+    .HttpMethod(THttpMethod.GET)
+    .Execute;
+  Result := StatusCode in [200,201];
+end;
+
 class function TCorreios.New(Parent: iAuthConfig): iCorreios;
 begin
   Result := Self.CreatePrivate(Parent);
@@ -79,6 +103,16 @@ function TCorreios.Params(aKey, aValue: String): iCorreios;
 begin
   Result := Self;
   FHttpClient.Params(aKey, aValue);
+end;
+
+function TCorreios.Post: boolean;
+begin
+  Result := False;
+  DoBeforeExecute;
+  FHttpClient
+    .HttpMethod(THttpMethod.POST)
+    .Execute;
+  Result := StatusCode in [200,201];
 end;
 
 function TCorreios.StatusCode: integer;

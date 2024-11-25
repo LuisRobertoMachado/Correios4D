@@ -119,9 +119,9 @@ begin
         begin
           ContentType := ctAPPLICATION_JSON;
           Kind := pkREQUESTBODY;
-          Name := 'body';
+//          Name := 'body';
           Value := FBody;
-          Options := [poDoNotEncode]
+//          Options := [poDoNotEncode]
         end;
       end;
   end;
@@ -151,14 +151,14 @@ function THttpClient.SetRestClient: boolean;
 begin
   Result := False;
   FRestClient := TRESTClient.Create(FUrl);
-  FRestClient.Accept := 'application/json, text/plain; q=0.9, text/html;q=0.8,';
-  FRestClient.AcceptCharset := 'UTF-8, *;q=0.8';
-  FRestClient.AcceptEncoding := '';
+  FRestClient.Accept := '*/*';
+//  FRestClient.AcceptCharset := 'UTF-8';//, *;q=0.8';
+  FRestClient.AcceptEncoding := 'gzip, deflate, br';
   FRestClient.AutoCreateParams := true;
   FRestClient.Authenticator := FAuthenticator;
   FRestClient.AllowCookies := true;
   FRestClient.ContentType := 'application/json';
-  FRestClient.FallbackCharsetEncoding := 'utf-8';
+//  FRestClient.FallbackCharsetEncoding := 'utf-8';
   FRestClient.HandleRedirects := true;
   Result := true;
 end;
@@ -169,16 +169,14 @@ var
 begin
   Result := False;
   FRestRequest := TRESTRequest.Create(FRestClient);
-  FRestRequest.Accept :=
-    'application/json, text/plain; q=0.9, text/html;q=0.8,';
-  FRestRequest.AcceptCharset := 'UTF-8, *;q=0.8';
-  FRestRequest.AcceptEncoding := '';
-  FRestRequest.AutoCreateParams := true;
+//  FRestRequest.Accept :=
+//    'application/json, text/plain; q=0.9, text/html;q=0.8,';
+//  FRestRequest.AcceptCharset := 'UTF-8, *;q=0.8';
+//  FRestRequest.AcceptEncoding := '';
+//  FRestRequest.AutoCreateParams := true;
   FRestRequest.Client := FRestClient;
-  FRestRequest.Method := rmGET;
-  FRestRequest.SynchronizedEvents := False;
+//  FRestRequest.SynchronizedEvents := False;
   FRestRequest.Response := FRestResponse;
-
   for key in FListaParams.Keys do
     FRestRequest.Params.AddItem(key, FListaParams.Items[key]);
   Result := true;

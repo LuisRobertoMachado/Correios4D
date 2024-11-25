@@ -14,7 +14,7 @@ type
   private
     FApi: TapiType;
     FApiVersion: TApiVersion;
-    FEndPointPrePostagem: TApiPrepostagemEndPointBaseType;
+    FPrepostagemEndPoint: TApiPrepostagemEndPointBaseType;
     FBaseUrl: string;
     FUserName: string;
     FCodigoAPIs: string;
@@ -30,17 +30,19 @@ type
     constructor Create;
     destructor Destroy; override;
     class function New: iAuthConfig;
-    function Api(AApi: TApiType): iAuthConfig; Overload;
-    function Api: TApiType; Overload;
+    function Api(AApi: TapiType): iAuthConfig; Overload;
+    function Api: TapiType; Overload;
     function ApiVersion(AVersion: TApiVersion): iAuthConfig; Overload;
     function ApiVersion: string; Overload;
-    function EndPoint: string;
+    function PrepostagemEndPoint(AEndPoint: TApiPrepostagemEndPointBaseType)
+      : iAuthConfig; Overload;
+    function EndPoint: string; Overload;
     function BaseUrl(AValue: string): iAuthConfig; Overload;
     function BaseUrl: string; Overload;
     function UserName(AValue: string): iAuthConfig; Overload;
-    function UserName: string;  Overload;
+    function UserName: string; Overload;
     function CodigoAPIs(AValue: string): iAuthConfig; Overload;
-    function CodigoAPIs: string;  Overload;
+    function CodigoAPIs: string; Overload;
     function CartaoPostagem(AValue: string): iAuthConfig; Overload;
     function Contrato(AValue: string): iAuthConfig; Overload;
     function Token: string;
@@ -50,8 +52,7 @@ implementation
 
 uses
   Correios4D.httpClient.Interfaces,
-  Correios4D.httpClient.RestHttpClient,
-  WidestringHelper;
+  Correios4D.httpClient.RestHttpClient;
 
 { TAuthConfig }
 
@@ -94,13 +95,22 @@ begin
   inherited;
 end;
 
+function TAuthConfig.PrepostagemEndPoint(AEndPoint
+  : TApiPrepostagemEndPointBaseType): iAuthConfig;
+begin
+  Result := Self;
+  FPrepostagemEndPoint := AEndPoint;
+end;
+
 function TAuthConfig.EndPoint: string;
 begin
-//  case Ord(FApi) of
-//    PRECO: ;
-//    PREPOSTAGEM: ;
-//    PRAZO: ;
-//  end;
+  case FApi of
+    // TOKEN: Result := F;
+    // PRECO: ;
+    PREPOSTAGEM:
+      Result := FPrepostagemEndPoint.GetValue;
+    // PRAZO: ;
+  end;
 end;
 
 function TAuthConfig.GetBodyAuthCartao: string;
@@ -146,24 +156,22 @@ var
   LHttp: iHttpClient;
   JSONObject: TJSONObject;
   LBody: widestring;
-  LUrl: widestring;
+  LUrl: string;
+  LEndPoint: string;
 begin
-  LUrl := FBaseUrl;
-  LUrl.concatenar(TApiType.TOKEN.ToString,'/');
-  LUrl.concatenar(TApiVersion.V1.ToString,'/');
-  if not FCartaoPostagem.isempty then
+  LEndPoint := TApiTokenEndPointBaseType.AUTENTICA.GetValue;
+  if not FCartaoPostagem.IsEmpty then
   begin
-    LUrl.concatenar(TApiTokenEndPointBaseType.AUTENTICA_CARTAO.Getvalue,'/');
+    LEndPoint := TApiTokenEndPointBaseType.AUTENTICA_CARTAO.GetValue;
     LBody := GetBodyAuthCartao;
   end
-  else
-  if not FContrato.IsEmpty then
+  else if not FContrato.IsEmpty then
   begin
-    LUrl.concatenar(TApiTokenEndPointBaseType.AUTENTICA_CONTRATO.Getvalue,'/');
+    LEndPoint := TApiTokenEndPointBaseType.AUTENTICA_CONTRATO.GetValue;
     LBody := GetBodyAuthContrato;
-  end
-  else
-    LUrl.concatenar(TApiTokenEndPointBaseType.AUTENTICA.Getvalue,'/');
+  end;
+  LUrl := string.Join('/', [FBaseUrl, TapiType.Token.ToString, TApiVersion.V1.ToString,
+    LEndPoint]);
 
   LHttp :=
     THttpClient
@@ -188,7 +196,7 @@ end;
 
 function TAuthConfig.Token: string;
 begin
-  if FToken.isempty or (FValidadeToken < now) then
+  if FToken.IsEmpty or (FValidadeToken < now) then
     RenovarToken;
 
   Result := FToken;
@@ -200,7 +208,7 @@ begin
   FBaseUrl := AValue;
 end;
 
-function TAuthConfig.Api(AApi: TApitype): iAuthConfig;
+function TAuthConfig.Api(AApi: TapiType): iAuthConfig;
 begin
   Result := Self;
   FApi := AApi;
@@ -212,7 +220,7 @@ begin
   FApiVersion := AVersion;
 end;
 
-function TAuthConfig.Api: TApiType;
+function TAuthConfig.Api: TapiType;
 begin
   Result := FApi;
 end;
@@ -224,7 +232,7 @@ end;
 
 function TAuthConfig.BaseUrl: string;
 begin
-  result :=  FBaseUrl;
+  Result := FBaseUrl;
 end;
 
 function TAuthConfig.UserName(AValue: string): iAuthConfig;

@@ -33,8 +33,10 @@ var
 implementation
 
 uses
-  Correios4D.Model.Entitys, Correios4D.Types, Correios4D.Model.Interfaces,
-  Correios4D.Model.DTO.prepostagem.utils.types;
+  Correios4D.Model.Entitys,
+  Correios4D.Types,
+  Correios4D.Model.Interfaces,
+  Correios4D.Model.DTO.prepostagem.utils.Types;
 
 {$R *.dfm}
 
@@ -45,13 +47,14 @@ begin
   FCorreios
     .AuthConfig
       .Api(PREPOSTAGEM)
-      .ApiVersion(V1);
+      .ApiVersion(V1)
+      .PrepostagemEndPoint(PREPOSTAGENS);
 
   LEntity :=
     FCorreios
       .Entity
         .PrePostagem
-          .CodigoServico('4008')
+          .CodigoServico('03298')
           .FormatoObjeto(Caixa)
           .Remetente
             .Nome('LUIS')
@@ -65,28 +68,25 @@ begin
               .Pais('BR')
               .&End
             .&end
+            .Destinatario
+              .Nome('RUSSIMAR')
+              .Endereco
+                .Logradouro('FLORES DA CUNHA')
+                .Numero('3742')
+                .Bairro('VILA BOM PRINCIPIO')
+                .Cidade('CACHOEIRINHA')
+                .Estado('RS')
+                .Cep('950001001')
+                .&End
+              .&end
           .&end;
 
-  Memo1.Text := LEntity.content;
-  exit;
-  FCorreios
-    .Resources
-      .Body(FCorreios
-              .Entity
-                .PrePostagem
-                  .Remetente
-                    .Nome('LUIS')
-                    .Endereco
-                      .CEP('94065170')
-                      .Logradouro('Rua São João Batista')
-                      .Numero('315')
-                      .Bairro('Parque Olinda')
-                      .Cidade('Gravataí')
-                      .Estado('RS')
-                      .Pais('BR')
-                      .&End
-                    .&end
-                  .&end);
+  with FCorreios.Resources do
+  begin
+    Body(LEntity);
+    Post;
+    Memo1.Text := Content;
+  end;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
