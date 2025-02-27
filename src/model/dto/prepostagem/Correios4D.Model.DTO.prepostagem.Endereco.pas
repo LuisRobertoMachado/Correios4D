@@ -22,6 +22,7 @@ type
     function Logradouro(const Value: string): iEnderecoDTO<T>;
     function Numero(const Value: string): iEnderecoDTO<T>;
     function Bairro(const Value: string): iEnderecoDTO<T>;
+    function Complemento(const Value: string): iEnderecoDTO<T>;
     function Cidade(const Value: string): iEnderecoDTO<T>;
     function Estado(const Value: string): iEnderecoDTO<T>;
     function Pais(const Value: string): iEnderecoDTO<T>;
@@ -55,6 +56,12 @@ function TEnderecoDTO<T>.Cidade(const Value: string): iEnderecoDTO<T>;
 begin
   Result := Self;
   FJson.AddPair('cidade', Value);
+end;
+
+function TEnderecoDTO<T>.Complemento(const Value: string): iEnderecoDTO<T>;
+begin
+  Result := Self;
+  FJson.AddPair('complemento', Value);
 end;
 
 constructor TEnderecoDTO<T>.Create;
