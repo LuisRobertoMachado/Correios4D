@@ -53,6 +53,13 @@ type
     function &End: T;
   end;
 
+  iServicoAdicionalDTO<T: IInterface> = interface
+  ['{25A93742-A667-463E-9FF5-3BAB1FC7481A}']
+    function codigoServicoAdicional(const AValue: string): iServicoAdicionalDTO<T>;
+    function Next: iServicoAdicionalDTO<T>;
+    function &End: T;
+  end;
+
   iPrepostagemDTO = interface
     ['{E7A2C2D5-5C48-4A5A-B9A4-1A9F3C7BBF6E}']
     function IdCorreios(AValue: string): iPrepostagemDTO;
@@ -80,7 +87,7 @@ type
     function LogisticaReversa(AValue: string): iPrepostagemDTO;
     function DataValidadeLogReversa(AValue: string): iPrepostagemDTO;
     // function DeclaracaoConteudo: iDeclaracaoConteudo<iPrepostagemDTO>;
-    // function ServicoAdicional: iServicoAdicional<iPrepostagemDTO>;
+    function ServicoAdicional: iServicoAdicionalDTO<iPrepostagemDTO>;
     function Remetente: iRemetenteDTO<iPrepostagemDTO>;
     function Destinatario: iDestinatarioDTO<iPrepostagemDTO>;
     function &End: iEntity;

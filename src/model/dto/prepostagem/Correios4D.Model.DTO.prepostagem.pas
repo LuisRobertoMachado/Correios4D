@@ -44,7 +44,7 @@ type
     function LogisticaReversa(AValue: string): iPrepostagemDTO;
     function DataValidadeLogReversa(AValue: string): iPrepostagemDTO;
     // function DeclaracaoConteudo: iDeclaracaoConteudo<iPrepostagemDTO>;
-    // function ServicoAdicional: iServicoAdicional<iPrepostagemDTO>;
+    function ServicoAdicional: iServicoAdicionalDTO<iPrepostagemDTO>;
     function Remetente: iRemetenteDTO<iPrepostagemDTO>;
     function Destinatario: iDestinatarioDTO<iPrepostagemDTO>;
     function &End: iEntity;
@@ -54,7 +54,8 @@ implementation
 
 uses
   Correios4D.Model.DTO.prepostagem.Remetente,
-  Correios4D.Model.DTO.prepostagem.Destinatario;
+  Correios4D.Model.DTO.prepostagem.Destinatario,
+  Correios4D.Model.DTO.prepostagem.ServicoAdicional;
 
 { TPrepostagemDTO }
 
@@ -234,6 +235,11 @@ function TPrepostagemDTO.RFIDObjeto(AValue: string): iPrepostagemDTO;
 begin
   Result := Self;
   FJSON.AddPair('rfidObjeto', AValue);
+end;
+
+function TPrepostagemDTO.ServicoAdicional: iServicoAdicionalDTO<iPrepostagemDTO>;
+begin
+  Result := TServicoAdicionalDTO<iPrepostagemDTO>.New(Self,FJSON);
 end;
 
 function TPrepostagemDTO.SolicitarColeta(AValue: string): iPrepostagemDTO;
