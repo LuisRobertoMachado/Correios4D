@@ -8,6 +8,16 @@ uses
 type
   iEntity = interface;
 
+  iConteudoDTO<T:IInterface> = interface
+  ['{82721A53-700B-436D-AF90-530E77587B8A}']
+    function Conteudo(const Value: string): iConteudoDTO<T>;
+    function Quantidade(const Value: string): iConteudoDTO<T>;
+    function Valor(const Value: string): iConteudoDTO<T>;
+    function Peso(const Value: string): iConteudoDTO<T>;
+    function Next: iConteudoDTO<T>;
+    Function &End: T;
+  end;
+
   iEnderecoDTO<T: IInterface> = interface
     ['{A7F6D3B5-2F6A-4E0C-9E6F-D3B7E4C4ABCD}']
     function Logradouro(const Value: string): iEnderecoDTO<T>;
@@ -86,7 +96,7 @@ type
     function ModalidadePagamento(AValue: string): iPrepostagemDTO;
     function LogisticaReversa(AValue: string): iPrepostagemDTO;
     function DataValidadeLogReversa(AValue: string): iPrepostagemDTO;
-    // function DeclaracaoConteudo: iDeclaracaoConteudo<iPrepostagemDTO>;
+    function DeclaracaoConteudo: iConteudoDTO<iPrepostagemDTO>;
     function ServicoAdicional: iServicoAdicionalDTO<iPrepostagemDTO>;
     function Remetente: iRemetenteDTO<iPrepostagemDTO>;
     function Destinatario: iDestinatarioDTO<iPrepostagemDTO>;

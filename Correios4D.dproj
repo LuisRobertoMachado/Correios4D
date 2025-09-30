@@ -100,6 +100,7 @@
         <DCCReference Include="src\model\dto\prepostagem\Correios4D.Model.DTO.prepostagem.Destinatario.pas"/>
         <DCCReference Include="src\model\dto\prepostagem\Correios4D.Model.DTO.prepostagem.Rotulo.pas"/>
         <DCCReference Include="src\model\dto\prepostagem\Correios4D.Model.DTO.prepostagem.ServicoAdicional.pas"/>
+        <DCCReference Include="src\model\dto\prepostagem\Correios4D.Model.DTO.prepostagem.Conteudo.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

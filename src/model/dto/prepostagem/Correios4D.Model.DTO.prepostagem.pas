@@ -43,7 +43,7 @@ type
     function ModalidadePagamento(AValue: string): iPrepostagemDTO;
     function LogisticaReversa(AValue: string): iPrepostagemDTO;
     function DataValidadeLogReversa(AValue: string): iPrepostagemDTO;
-    // function DeclaracaoConteudo: iDeclaracaoConteudo<iPrepostagemDTO>;
+    function DeclaracaoConteudo: iConteudoDTO<iPrepostagemDTO>;
     function ServicoAdicional: iServicoAdicionalDTO<iPrepostagemDTO>;
     function Remetente: iRemetenteDTO<iPrepostagemDTO>;
     function Destinatario: iDestinatarioDTO<iPrepostagemDTO>;
@@ -55,7 +55,8 @@ implementation
 uses
   Correios4D.Model.DTO.prepostagem.Remetente,
   Correios4D.Model.DTO.prepostagem.Destinatario,
-  Correios4D.Model.DTO.prepostagem.ServicoAdicional;
+  Correios4D.Model.DTO.prepostagem.ServicoAdicional,
+  Correios4D.Model.DTO.prepostagem.Conteudo;
 
 { TPrepostagemDTO }
 
@@ -124,6 +125,11 @@ function TPrepostagemDTO.DataValidadeLogReversa(AValue: string)
 begin
   Result := Self;
   FJSON.AddPair('dataValidadeLogReversa',AValue);
+end;
+
+function TPrepostagemDTO.DeclaracaoConteudo: iConteudoDTO<iPrepostagemDTO>;
+begin
+  Result := TConteudoDTO<iPrepostagemDTO>.New(Self,FJSON);
 end;
 
 function TPrepostagemDTO.Destinatario: iDestinatarioDTO<iPrepostagemDTO>;

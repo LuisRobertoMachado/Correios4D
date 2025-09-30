@@ -52,6 +52,7 @@ contains
   Correios4D.Model.Interfaces in 'src\model\Correios4D.Model.Interfaces.pas',
   Correios4D.Model.DTO.prepostagem.Destinatario in 'src\model\dto\prepostagem\Correios4D.Model.DTO.prepostagem.Destinatario.pas',
   Correios4D.Model.DTO.prepostagem.Rotulo in 'src\model\dto\prepostagem\Correios4D.Model.DTO.prepostagem.Rotulo.pas',
-  Correios4D.Model.DTO.prepostagem.ServicoAdicional in 'src\model\dto\prepostagem\Correios4D.Model.DTO.prepostagem.ServicoAdicional.pas';
+  Correios4D.Model.DTO.prepostagem.ServicoAdicional in 'src\model\dto\prepostagem\Correios4D.Model.DTO.prepostagem.ServicoAdicional.pas',
+  Correios4D.Model.DTO.prepostagem.Conteudo in 'src\model\dto\prepostagem\Correios4D.Model.DTO.prepostagem.Conteudo.pas';
 
 end.
